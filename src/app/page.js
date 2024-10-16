@@ -1,15 +1,16 @@
 function Home() {
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      Welcome to Next JS!
+    <div className="container text-center my-4">
+      <h1>Home</h1>
+      <div className="">
+        <p> Song Name</p>
+        <p>Album Name</p>
+        <p>Artist Name</p>
+        <p>Song Length</p>
+        <button type="button" className="btn btn-primary">
+          ...
+        </button>
+      </div>
     </div>
   );
 }
