@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { Dropdown } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 
 export default function SongCard() {
@@ -18,9 +21,16 @@ export default function SongCard() {
         <p>Album Name</p>
         <p>Artist Name</p>
         <p>Song Length</p>
-        <button type="button" className="btn btn-primary">
-          ...
-        </button>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            ...
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Go to song</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Add to playlist</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </>
   );
