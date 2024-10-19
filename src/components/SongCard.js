@@ -6,17 +6,11 @@ import PropTypes from 'prop-types';
 
 export default function SongCard({ songObj }) {
   return (
-    <div className="border">
-      <h1 className="my-3">Home</h1>
-      <p>${songObj.name} Song Name</p>
-      <p>${songObj.album.name} Album Name</p>
-      <p>${songObj.artist.name} Artist Name</p>
-      <p>${songObj.length} Song Length</p>
-      {/* <h1 className="my-3">Home</h1>
-        <p>Song Name</p>
-        <p>Album Name</p>
-        <p>Artist Name</p>
-        <p>Song Length</p> */}
+    <div className="border my-3">
+      <p>{songObj.name}</p>
+      <p>{songObj.album.name}</p>
+      <p>{songObj.artist.name}</p>
+      <p>{songObj.length}</p>
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           ...

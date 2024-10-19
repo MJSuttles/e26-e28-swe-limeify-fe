@@ -4,7 +4,7 @@ const endpoint = clientCredentials.databaseURL;
 
 const getSongs = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/songs.json`, {
+    fetch(`${endpoint}/api/songs`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
