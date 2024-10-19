@@ -12,12 +12,12 @@ const getSongs = () =>
     })
       .then((response) => response.json())
       .then((data) => {
+        console.warn(data);
         if (data) {
           resolve(Object.values(data));
         } else {
           resolve([]);
         }
-        // console.warn(data);
       })
       .catch(reject);
   });
