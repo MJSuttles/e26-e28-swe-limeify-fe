@@ -17,7 +17,7 @@ export default function PlaylistsPage() {
     <div className="container text-center my-4">
       <h1 className="my-3">Playlists Page</h1>
       {playlists.map((playlist) => (
-        <PlaylistCard playlistObj={playlist} />
+        <PlaylistCard key={playlist.id} playlistObj={playlist} />
       ))}
     </div>
   );

@@ -6,7 +6,7 @@ import getSongs from '../api/songData';
 
 function Home() {
   const [songs, setSongs] = useState([]);
-  console.warn(songs);
+  // console.warn(songs);
 
   useEffect(() => {
     getSongs().then(setSongs);
