@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
@@ -46,21 +48,29 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
 
       <Form onSubmit={handleSubmit} className="text-center">
         {/* TODO: Each Form.Control needs an onChange attribute. Pass in handleChange as a callback. */}
+
+        {/* PLAYLIST NAME INPUT */}
         <Form.Group className="mb-3" controlId="">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="textbox" placeholder="name of playlist" value={formData.name || ''} onChange={handleChange} required />
+          <Form.Control type="textbox" placeholder="name of playlist" name="playlist-name" value={formData.name || ''} onChange={handleChange} required />
           <Form.Text className="text-muted">required</Form.Text>
         </Form.Group>
+
+        {/* PLAYLIST URL IMAGE INPUT */}
         <Form.Group className="mb-3" controlId="">
           <Form.Label>Image</Form.Label>
-          <Form.Control type="textbox" placeholder="enter an image URL" value={formData.image || ''} onChange={handleChange} required />
+          <Form.Control type="textbox" placeholder="enter an image URL" name="image" value={formData.image || ''} onChange={handleChange} required />
           <Form.Text className="text-muted">required</Form.Text>
         </Form.Group>
-        {/* TODO: Dropdown menu */}
-        <Form.Group className="mb-3" controlId="">
+
+        {/* TODO: Dropdown select menu */}
+        <Form.Group className="mb-3">
           <Form.Label>Category</Form.Label>
-          <Form.Control type="textbox" placeholder="enter an image URL" value={formData.categoryId || ''} onChange={handleChange} required />
-          <Form.Text className="text-muted">required</Form.Text>
+          <Form.Select onChange={handleChange}>
+            <option value="">Select ...</option>
+            {/* TODO: map over values. Remember to add a key prop. */}
+            <option>Option 1</option>
+          </Form.Select>
         </Form.Group>
 
         <button className="btn btn-primary" type="submit">
