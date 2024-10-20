@@ -12,7 +12,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="container text-center my-4">
+    <div className="text-center my-4" id="song-page">
       <h1 className="my-3">Home</h1>
       {songs.map((song) => (
         <SongCard songObj={song} />
