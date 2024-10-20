@@ -3,6 +3,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 export default function SongCard({ songObj }) {
   return (
@@ -26,8 +27,12 @@ export default function SongCard({ songObj }) {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Go to song</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Add to playlist</Dropdown.Item>
+            <Dropdown.Item href="">
+              <Link href={`/songs/${songObj.id}`} passHref>
+                Go to song
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item href="">Add to playlist</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -37,6 +42,7 @@ export default function SongCard({ songObj }) {
 
 SongCard.propTypes = {
   songObj: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     length: PropTypes.number,
     artist: PropTypes.shape({
