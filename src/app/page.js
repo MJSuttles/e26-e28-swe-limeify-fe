@@ -15,7 +15,7 @@ function Home() {
     <div className="text-center my-4" id="song-page">
       <h1 className="my-3">Home</h1>
       {songs.map((song) => (
-        <SongCard songObj={song} />
+        <SongCard key={song.id} songObj={song} />
       ))}
     </div>
   );
