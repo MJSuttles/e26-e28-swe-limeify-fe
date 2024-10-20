@@ -6,21 +6,31 @@ import PropTypes from 'prop-types';
 
 export default function SongCard({ songObj }) {
   return (
-    <div className="border my-3">
-      <p>{songObj.name}</p>
-      <p>{songObj.album.name}</p>
-      <p>{songObj.artist.name}</p>
-      <p>{songObj.length}</p>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          ...
-        </Dropdown.Toggle>
+    <div className="border my-3 d-flex container row">
+      <div className="col">
+        <p>{songObj.name}</p>
+      </div>
+      <div className="col">
+        <p>{songObj.album.name}</p>
+      </div>
+      <div className="col">
+        <p>{songObj.artist.name}</p>
+      </div>
+      <div className="col">
+        <p>{songObj.length}</p>
+      </div>
+      <div className="col">
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            ...
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Go to song</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Add to playlist</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Go to song</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Add to playlist</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import SongCard from '../components/SongCard';
 import getSongs from '../api/songData';
 
 function Home() {
-  const [songs, setSongs] = useState({});
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     getSongs().then(setSongs);
