@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import SongCard from '../components/SongCard';
 import getSongs from '../api/songData';
 
+// import AddPlaylistForm from '../components/forms/AddPlaylistForm';
+
 function Home() {
   const [songs, setSongs] = useState([]);
   // console.warn(songs);
@@ -14,6 +16,7 @@ function Home() {
 
   return (
     <div className="text-center my-4" id="song-page">
+      {/* <AddPlaylistForm /> */}
       <h1 className="my-3">Home</h1>
       {songs.map((song) => (
         <SongCard key={song.id} songObj={song} />
