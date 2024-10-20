@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function SongCard({ songObj }) {
   return (
-    <div className="row align-items-center border my-3 d-flex container" style={{ width: '70%', height: '5rem' }}>
+    <div className="row align-items-center border my-3 d-flex container" style={{ width: '70%', height: '7rem' }}>
       <div className="col">
         <p>{songObj.name}</p>
       </div>
