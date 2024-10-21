@@ -19,7 +19,7 @@ const getPlaylists = (uid) =>
 // GET SINGLE PLAYLIST
 const getSinglePlaylist = (id) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/playlist/${id}`, {
+    fetch(`${endpoint}/api/playlists/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const getSinglePlaylist = (id) =>
 // CREATE PLAYLIST
 const createPlaylist = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist`, {
+    fetch(`${endpoint}/api/playlists`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const createPlaylist = (payload) =>
 // PUT PLAYLIST
 const updatePlaylist = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/playlist/${payload.id}`, {
+    fetch(`${endpoint}/api/playlists/${payload.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const updatePlaylist = (payload) =>
 // DELETE PLAYLIST
 const deletePlaylist = (id) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/playlist/${id}`, {
+    fetch(`${endpoint}/api/playlists/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
