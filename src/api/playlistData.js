@@ -5,7 +5,7 @@ const endpoint = clientCredentials.databaseURL;
 // GET ALL PLAYLISTS
 const getPlaylists = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/playlists?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/api/user/${uid}/playlists`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
