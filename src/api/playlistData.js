@@ -2,10 +2,23 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
+// Temporarily commented this code out.
 // GET ALL PLAYLISTS
-const getPlaylists = (uid) =>
+// const getPlaylists = (uid) =>
+//   new Promise((resolve, reject) => {
+//     fetch(`${endpoint}/api/user/${uid}/playlists`, {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     })
+//       .then((response) => response.json())
+//       .then((data) => resolve(Object.values(data)))
+//       .catch(reject);
+//   });
+const getPlaylists = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/user/${uid}/playlists`, {
+    fetch(`${endpoint}/api/playlists`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
