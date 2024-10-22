@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import { getSingleSong } from '../../../api/songData';
 
 export default function ViewSong({ params }) {
-  const [song, setSong] = useState({});
+  // Set the initial state to null or else you will run into a runtime error. There's a chance
+  // the nested data is undefined (the returned data from the API call might not fire off before
+  // initial render).
+  const [song, setSong] = useState(null);
 
   const { id } = params;
 
@@ -18,16 +21,26 @@ export default function ViewSong({ params }) {
       <h1>Song Detail</h1>
       <div className="my-5 song-info">
         {/* TODO: Add an image here for the song */}
-        <h2>{song.name}</h2>
-        <p>{song.album.name}</p>
-        <p>{song.genre.name}</p>
-        <p>{song.length}</p>
+
+        {/* 
+          Add ? before the period. This is called an optional chaining operator. Without it
+          you might run into runtime errors.
+          
+          According to MDN, the object's properties we are trying
+          to access will instead evaluate to undefined instead of throwing errors.
+
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+        */}
+        <h2>{song?.name}</h2>
+        <p>{song?.album.name}</p>
+        <p>{song?.genre.name}</p>
+        <p>{song?.length}</p>
       </div>
 
       <div className="my-5 artist-info">
         {/* TODO: add an image here for the artist */}
         <h2>Artist</h2>
-        <p>{song.artist.name}</p>
+        <p>{song?.artist?.name}</p>
       </div>
 
       <button className="btn btn-primary" type="button">
