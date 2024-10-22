@@ -9,6 +9,10 @@ export default function SongCard({ songObj }) {
   return (
     <div className="row align-items-center border my-3 d-flex container" style={{ width: '70%', height: '7rem' }}>
       <div className="col">
+        <img src={songObj?.album?.image} alt="Album" style={{ width: '4.25rem', height: '4.25rem' }} />
+      </div>
+
+      <div className="col">
         <p>{songObj.name}</p>
       </div>
       <div className="col">
@@ -52,6 +56,7 @@ SongCard.propTypes = {
     }).isRequired,
     album: PropTypes.shape({
       name: PropTypes.string,
+      image: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
