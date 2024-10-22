@@ -34,7 +34,7 @@ const getSingleSong = (id) =>
       .then((data) => {
         // console.warn(data);
         if (data) {
-          resolve(Object.values(data));
+          resolve(data);
         } else {
           resolve([]);
         }

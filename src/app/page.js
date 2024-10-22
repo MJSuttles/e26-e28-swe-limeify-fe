@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import SongCard from '../components/SongCard';
-import getSongs from '../api/songData';
+import { getSongs } from '../api/songData';
 
 function Home() {
   const [songs, setSongs] = useState([]);
