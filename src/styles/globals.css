@@ -2,3 +2,9 @@ body {
   background: black;
   color: white;
 }
+
+#song-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

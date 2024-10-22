@@ -12,7 +12,7 @@ const getSongs = () =>
     })
       .then((response) => response.json())
       .then((data) => {
-        console.warn(data);
+        // console.warn(data);
         if (data) {
           resolve(Object.values(data));
         } else {
