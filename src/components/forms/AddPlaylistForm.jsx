@@ -8,21 +8,20 @@ import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../api/playlistData';
 import getCategories from '../../api/categoryData';
 
+// Step one - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside AddPlaylistForm. Initialize router object.
 const initialFormState = {
   name: '',
   image: '',
   categoryId: '',
 };
 export default function AddPlaylistForm({ obj = initialFormState }) {
-  // Step one - set an initial state for the form.
-
-  // Step two - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside form. Initialize router object.
-  const [formData, setFormData] = useState(obj);
-  const [categories, setCategories] = useState([]);
-
-  // console.warn(formData);
   const { user } = useAuth();
   const router = useRouter();
+
+  // Step two - set an initial state for the form.
+  const [formData, setFormData] = useState(obj);
+  // console.warn(formData);
+  const [categories, setCategories] = useState([]);
 
   // Step three - useEffect
   useEffect(() => {
@@ -48,9 +47,13 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
     } else {
       // New Payload? Push the payload to the BE, update/patch payload with the id key that BE would return.
       const payload = { ...formData, uid: user.uid };
-      // Monitor what happens when sending payloads as a PUT request in Postman.
+      console.warn('Payload: ', payload);
+
+      // Monitor what happens when sending payloads as a POST request in Postman.
       createPlaylist(payload).then(({ name }) => {
         const patchPayload = { id: name };
+        console.warn('Patched payload: ', patchPayload);
+
         updatePlaylist(patchPayload).then(() => {
           router.push('/playlists');
         });
@@ -68,7 +71,7 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
         {/* PLAYLIST NAME INPUT */}
         <Form.Group className="mb-3" controlId="">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="textbox" placeholder="name of playlist" name="playlist-name" value={formData.name || ''} onChange={handleChange} required />
+          <Form.Control type="textbox" placeholder="name of playlist" name="name" value={formData.name || ''} onChange={handleChange} required />
           <Form.Text className="text-muted">required</Form.Text>
         </Form.Group>
 
@@ -82,11 +85,11 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
         {/* TODO: Dropdown select menu */}
         <Form.Group className="mb-3">
           <Form.Label>Category</Form.Label>
-          <Form.Select onChange={handleChange}>
+          <Form.Select onChange={handleChange} aria-label="Category" name="categoryId" className="mb-3" value={formData.categoryId || ''} required>
             <option value="">Select ...</option>
             {/* TODO: map over values. Remember to add a key prop. */}
             {categories.map((category) => (
-              <option key={category.id} value={category.id}>
+              <option key={category.id} value={Number(category.id)}>
                 {category.name}
               </option>
             ))}
@@ -106,5 +109,7 @@ AddPlaylistForm.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
     category: PropTypes.string,
+    categoryId: PropTypes.number,
+    songs: PropTypes.bool,
   }).isRequired,
 };
