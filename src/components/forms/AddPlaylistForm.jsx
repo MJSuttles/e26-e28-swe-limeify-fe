@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../../utils/context/authContext';
+import { createPlaylist, updatePlaylist } from '../../api/playlistData';
 
 const initialFormState = {
   name: '',
@@ -17,6 +19,7 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
   const [formData, setFormData] = useState(obj);
   // console.warn(formData);
   const { user } = useAuth();
+  const router = useRouter();
 
   // Step three - useEffect
   useEffect(() => {
@@ -37,16 +40,25 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
     e.preventDefault();
     if (obj.id) {
       // TODO: Use router to send the user to the playlist they just created. Requires an API call to the backend to create a playlist, push payload to the BE.
+      updatePlaylist(formData).then(() => router.push(`/playlists/${obj.id}`));
     } else {
       // New Payload? Push the payload to the BE, update/patch payload with the id key that BE would return.
+      const payload = { ...formData, uid: user.uid };
+      // Monitor what happens when sending payloads as a PUT request in Postman.
+      createPlaylist(payload).then(({ name }) => {
+        const patchPayload = { id: name };
+        updatePlaylist(patchPayload).then(() => {
+          router.push('/playlists');
+        });
+      });
     }
   };
 
   return (
-    <div>
-      <h1>Add Playlist</h1>
+    <div className="d-flex flex-column align-items-center my-4" id="add-update-playlist">
+      <h1 className="my-5">Add Playlist</h1>
 
-      <Form onSubmit={handleSubmit} className="text-center">
+      <Form onSubmit={handleSubmit} className="text-center" style={{ width: '50%' }}>
         {/* TODO: Each Form.Control needs an onChange attribute. Pass in handleChange as a callback. */}
 
         {/* PLAYLIST NAME INPUT */}
