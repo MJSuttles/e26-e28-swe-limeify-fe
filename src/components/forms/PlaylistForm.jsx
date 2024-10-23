@@ -8,13 +8,13 @@ import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../api/playlistData';
 import getCategories from '../../api/categoryData';
 
-// Step one - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside AddPlaylistForm. Initialize router object.
+// Step one - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside PlaylistForm. Initialize router object.
 const initialFormState = {
   name: '',
   image: '',
   categoryId: '',
 };
-export default function AddPlaylistForm({ obj = initialFormState }) {
+export default function PlaylistForm({ obj = initialFormState }) {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -63,7 +63,7 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
 
   return (
     <div className="d-flex flex-column align-items-center my-4" id="add-update-playlist">
-      <h1 className="my-5">Add Playlist</h1>
+      <h1 className="my-5">Playlist Form</h1>
 
       <Form onSubmit={handleSubmit} className="text-center" style={{ width: '50%' }}>
         {/* TODO: Each Form.Control needs an onChange attribute. Pass in handleChange as a callback. */}
@@ -104,7 +104,9 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
   );
 }
 
-AddPlaylistForm.propTypes = {
+// Note to self: your prop types should be structured the same way as the records in your DB. If your payload
+// doesn't match the structure, the server may reject your request.
+PlaylistForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
