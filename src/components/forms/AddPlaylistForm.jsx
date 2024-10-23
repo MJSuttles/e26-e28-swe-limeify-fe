@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../api/playlistData';
+import getCategories from '../../api/categoryData';
 
 const initialFormState = {
   name: '',
@@ -15,14 +16,17 @@ const initialFormState = {
 export default function AddPlaylistForm({ obj = initialFormState }) {
   // Step one - set an initial state for the form.
 
-  // Step two - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside AuthorForm. Initialize router object.
+  // Step two - Set initialFormState as the default parameter. Grab the useAuth hook. Set a useState inside form. Initialize router object.
   const [formData, setFormData] = useState(obj);
+  const [categories, setCategories] = useState([]);
+
   // console.warn(formData);
   const { user } = useAuth();
   const router = useRouter();
 
   // Step three - useEffect
   useEffect(() => {
+    getCategories().then(setCategories);
     if (obj.id) setFormData(obj);
   }, [obj, user]);
 
@@ -81,7 +85,11 @@ export default function AddPlaylistForm({ obj = initialFormState }) {
           <Form.Select onChange={handleChange}>
             <option value="">Select ...</option>
             {/* TODO: map over values. Remember to add a key prop. */}
-            <option>Option 1</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </Form.Select>
         </Form.Group>
 
@@ -97,5 +105,6 @@ AddPlaylistForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
+    category: PropTypes.string,
   }).isRequired,
 };
