@@ -50,13 +50,8 @@ export default function PlaylistForm({ obj = initialFormState }) {
       console.warn('Payload: ', payload);
 
       // Monitor what happens when sending payloads as a POST request in Postman.
-      createPlaylist(payload).then(({ name }) => {
-        const patchPayload = { id: name };
-        console.warn('Patched payload: ', patchPayload);
-
-        updatePlaylist(patchPayload).then(() => {
-          router.push('/playlists');
-        });
+      createPlaylist(payload).then(() => {
+        router.push('/playlists');
       });
     }
   };
