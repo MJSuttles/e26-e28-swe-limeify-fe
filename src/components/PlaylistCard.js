@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link';
+import { Dropdown } from 'react-bootstrap';
 
 export default function PlaylistCard({ playlistObj }) {
   return (
@@ -13,6 +14,22 @@ export default function PlaylistCard({ playlistObj }) {
       <Link href={`/playlists/edit/${playlistObj.id}`} passHref>
         Edit
       </Link>
+      <div className="col">
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            ...
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="">
+              <Link href={`/playlists/${playlistObj.id}`} passHref>
+                Go to playlist
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item href="">Add to playlist</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     </div>
   );
 }
