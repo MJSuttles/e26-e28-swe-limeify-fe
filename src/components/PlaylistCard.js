@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import Link from 'next/link';
 
 export default function PlaylistCard({ playlistObj }) {
   return (
@@ -9,6 +10,9 @@ export default function PlaylistCard({ playlistObj }) {
       <img src={playlistObj.image} alt="playlist" style={{ width: '10rem', height: '10rem' }} />
       <p>{playlistObj.name}</p>
       <p>{playlistObj.categoryId}</p>
+      <Link href={`/playlists/edit/${playlistObj.id}`} passHref>
+        Edit
+      </Link>
     </div>
   );
 }
@@ -18,5 +22,6 @@ PlaylistCard.propTypes = {
     name: PropTypes.string,
     categoryId: PropTypes.string,
     image: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
 };

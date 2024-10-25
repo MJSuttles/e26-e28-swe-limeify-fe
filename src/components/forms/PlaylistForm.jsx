@@ -43,7 +43,8 @@ export default function PlaylistForm({ obj = initialFormState }) {
     e.preventDefault();
     if (obj.id) {
       // TODO: Use router to send the user to the playlist they just created. Requires an API call to the backend to create a playlist, push payload to the BE.
-      updatePlaylist(formData).then(() => router.push(`/playlists/${obj.id}`));
+      // updatePlaylist(formData).then(() => router.push(`/playlists/${obj.id}`));
+      updatePlaylist(formData).then(() => router.push(`/playlists`));
     } else {
       // New Payload? Push the payload to the BE, update/patch payload with the id key that BE would return.
       const payload = { ...formData, uid: user.uid };
