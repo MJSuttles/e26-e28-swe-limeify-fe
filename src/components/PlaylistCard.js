@@ -4,8 +4,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
+import { deletePlaylist } from '../api/playlistData';
 
-export default function PlaylistCard({ playlistObj }) {
+export default function PlaylistCard({ playlistObj, onUpdate }) {
+  const deletePlaylistFromView = () => {
+    if (window.confirm(`Delete ${playlistObj.name}?`)) {
+      console.warn('Delete event triggered!');
+      deletePlaylist(playlistObj.id).then(() => {
+        onUpdate();
+      });
+    }
+  };
+
   return (
     <div className="border my-3">
       <img src={playlistObj.image} alt="playlist" style={{ width: '10rem', height: '10rem' }} />
@@ -26,7 +36,7 @@ export default function PlaylistCard({ playlistObj }) {
                 Go to playlist
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item href="">Add to playlist</Dropdown.Item>
+            <Dropdown.Item onClick={deletePlaylistFromView}>Delete</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -41,4 +51,5 @@ PlaylistCard.propTypes = {
     image: PropTypes.string,
     id: PropTypes.number,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
