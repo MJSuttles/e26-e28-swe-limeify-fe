@@ -38,6 +38,14 @@ export default function ViewPlaylist({ params }) {
         <p>{playlist?.song?.length}</p>
       </div>
 
+      <div>
+        <h2>Songs</h2>
+        {playlist?.songs?.map((song) => (
+          // <SongCard key={song.id} songObj={song} />
+          <p>{song.name}</p>
+        ))}
+      </div>
+
       <Link href={`/playlists/edit/${id}`} passHref>
         Edit
       </Link>
