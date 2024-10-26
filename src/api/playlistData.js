@@ -75,19 +75,21 @@ const deletePlaylist = (id) =>
   });
 
 // ADD SONG TO PLAYLIST
-const addSongToPlaylist = async (songId, playlistId) => {
-  // eslint-disable-next-line no-useless-catch
+const addSongToPlaylist = async (songId, playlistId, payload) => {
   try {
     const response = await fetch(`${endpoint}/api/songs/${songId}/add-to-playlist/${playlistId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify(payload), // Uncomment if there's a payload
+      body: JSON.stringify(payload),
     });
+
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
+    console.error('Error adding song to playlist:', error);
     throw error;
   }
 };

@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+
 'use client';
 
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { getSinglePlaylist } from '../../../api/playlistData';
@@ -29,7 +31,7 @@ export default function ViewPlaylist({ params }) {
           https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
         */}
         <p>{playlist?.name}</p>
-        {/* <img src={playlist?.image} alt="Playlist Image" /> */}
+        <img src={playlist?.image} alt="Playlist Cover" />
         <p>{playlist?.song?.name}</p>
         <p>{playlist?.song?.album?.name}</p>
         <p>{playlist?.song?.artist?.name}</p>
