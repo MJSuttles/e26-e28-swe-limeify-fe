@@ -36,7 +36,7 @@ export default function SongCard({ songObj }) {
                 Go to song
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item href="/playlists/add">Add to playlist</Dropdown.Item>
+            <Dropdown.Item href={`/playlists/add?songId=${songObj.id}`}>Add to playlist</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>

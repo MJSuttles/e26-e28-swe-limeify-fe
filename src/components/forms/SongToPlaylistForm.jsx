@@ -1,66 +1,54 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import { useRouter } from 'next/navigation';
-import PropTypes from 'prop-types';
-import { getPlaylists, addSongToPlaylist } from '../../api/playlistData';
-import { useAuth } from '../../utils/context/authContext';
-// Initial form state
-const initialFormState = {
-  name: '',
-};
-export default function SongToPlaylistForm({ obj = initialFormState }) {
-  // Grab the authenticated user and initialize router
-  const { user } = useAuth();
-  const router = useRouter();
-  // Set up component state
-  const [formData, setFormData] = useState(obj);
+import { useRouter, useSearchParams } from 'next/navigation';
+import { addSongToPlaylist, getPlaylists } from '../../api/playlistData';
+
+export default function AddToPlaylistForm() {
   const [playlists, setPlaylists] = useState([]);
-  // Fetch playlists on mount and when obj or user changes
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { songId } = searchParams.get('songId');
+
   useEffect(() => {
     getPlaylists().then(setPlaylists);
-    if (obj.id) setFormData(obj);
-  }, [obj, user]);
-  // Handle form input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  // Handle form submission
-  const handleSubmit = (e) => {
+  }, []);
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addSongToPlaylist(formData).then(() => router.push('/playlists'));
+    if (!selectedPlaylist) return alert('Please select a playlist.');
+
+    try {
+      await addSongToPlaylist(songId, selectedPlaylist);
+      alert('Song added to playlist!');
+      router.push('/playlists');
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+      console.error('Error adding song to playlist:', error);
+    }
   };
+
   return (
-    <div className="d-flex flex-column align-items-center my-4" id="add-song-to-playlist">
-      <h1 className="my-5">Add to Playlist</h1>
-      <Form onSubmit={handleSubmit} className="text-center" style={{ width: '50%' }}>
-        {/* Playlist Selection */}
-        <Form.Group className="mb-3">
-          <Form.Label>To which playlist would you like to add this</Form.Label>
-          <Form.Select onChange={handleChange} aria-label="Playlist" name="name" className="mb-3" value={formData.name || ''} required>
-            <option value="">Select ...</option>
-            {/* Map over playlists for options */}
+    <div style={{ width: '50%', margin: 'auto', paddingTop: '2rem' }}>
+      <h2>Add Song to Playlist</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-3">
+          <label htmlFor="playlist-select">Choose Playlist:</label>
+          <select id="playlist-select" className="form-control" value={selectedPlaylist} onChange={(e) => setSelectedPlaylist(e.target.value)} required>
+            <option value="">Select a playlist</option>
             {playlists.map((playlist) => (
-              <option key={playlist.id} value={playlist.name}>
+              <option key={playlist.id} value={playlist.id}>
                 {playlist.name}
               </option>
             ))}
-          </Form.Select>
-        </Form.Group>
-        <button className="btn btn-primary" type="submit">
-          Add
+          </select>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Add Song
         </button>
-      </Form>
+      </form>
     </div>
   );
 }
-SongToPlaylistForm.propTypes = {
-  obj: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-};
