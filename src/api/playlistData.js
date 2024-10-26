@@ -2,20 +2,7 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-// Temporarily commented this code out.
 // GET ALL PLAYLISTS
-// const getPlaylists = (uid) =>
-//   new Promise((resolve, reject) => {
-//     fetch(`${endpoint}/api/user/${uid}/playlists`, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => resolve(Object.values(data)))
-//       .catch(reject);
-//   });
 const getPlaylists = () =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/playlists`, {
@@ -77,7 +64,7 @@ const updatePlaylist = (payload) =>
 const deletePlaylist = (id) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/playlists/${id}`, {
-      method: 'GET',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -87,4 +74,22 @@ const deletePlaylist = (id) =>
       .catch(reject);
   });
 
-export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist };
+// ADD SONG TO PLAYLIST
+const addSongToPlaylist = async (songId, playlistId) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await fetch(`${endpoint}/api/songs/${songId}/add-to-playlist/${playlistId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // body: JSON.stringify(payload), // Uncomment if there's a payload
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist };
