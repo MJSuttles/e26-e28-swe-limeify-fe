@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { getPlaylists } from '../../api/playlistData';
 import PlaylistCard from '../../components/PlaylistCard';
 
@@ -22,6 +23,12 @@ export default function PlaylistsPage() {
   return (
     <div className="container text-center my-4">
       <h1 className="my-3">Playlists Page</h1>
+      <Link href="/playlists/new" passHref>
+        <button type="button" className="btn btn-primary">
+          Add a playlist
+        </button>
+      </Link>
+
       {playlists.map((playlist) => (
         <PlaylistCard key={playlist.id} playlistObj={playlist} onUpdate={fetchPlaylistData} />
       ))}
