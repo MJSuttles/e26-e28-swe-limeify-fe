@@ -77,12 +77,12 @@ const updatePlaylist = (payload) =>
 const deletePlaylist = (id) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/playlists/${id}`, {
-      method: 'GET',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
+      .then((response) => response.json)
       .then((data) => resolve(data))
       .catch(reject);
   });
