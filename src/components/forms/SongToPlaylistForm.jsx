@@ -9,7 +9,8 @@ export default function AddToPlaylistForm() {
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { songId } = searchParams.get('songId');
+  const songId = searchParams.get('songId');
+  console.log(songId);
 
   useEffect(() => {
     getPlaylists().then(setPlaylists);
