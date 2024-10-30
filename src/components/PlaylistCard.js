@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
 import { deletePlaylist } from '../api/playlistData';
 
+// import Image from 'next/image';
+
 export default function PlaylistCard({ playlistObj, onUpdate }) {
   const deletePlaylistFromView = () => {
     if (window.confirm(`Delete ${playlistObj.name}?`)) {
@@ -19,6 +21,7 @@ export default function PlaylistCard({ playlistObj, onUpdate }) {
   return (
     <div className="border my-3">
       <img src={playlistObj.image} alt="playlist" style={{ width: '10rem', height: '10rem' }} />
+      {/* <Image src={playlistObj.image} alt="playlist" height={400} width={400}/> */}
       <p>{playlistObj.name}</p>
       <p>{playlistObj.categoryId}</p>
       <Link href={`/playlists/edit/${playlistObj.id}`}>Edit</Link>

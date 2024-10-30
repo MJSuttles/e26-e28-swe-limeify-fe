@@ -94,4 +94,18 @@ const addSongToPlaylist = async (songId, playlistId, payload) => {
   }
 };
 
-export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist };
+// DELETE SONG FROM PLAYLIST
+const deletePlaylistSong = (songId, playlistId) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/songs/${songId}/remove-from-playlist/${playlistId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deletePlaylistSong };

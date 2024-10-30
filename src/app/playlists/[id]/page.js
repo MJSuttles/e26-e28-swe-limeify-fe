@@ -5,54 +5,66 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { getSinglePlaylist } from '../../../api/playlistData';
+import { Dropdown } from 'react-bootstrap';
+import { getSinglePlaylist, deletePlaylistSong } from '../../../api/playlistData';
 
 export default function ViewPlaylist({ params }) {
-  // Set useState
   const [playlist, setPlaylist] = useState(null);
-
   const { id } = params;
 
   useEffect(() => {
     getSinglePlaylist(id).then(setPlaylist);
   }, [id]);
 
+  const deleteSongFromPlaylist = ({ playlistObj, onUpdate }) => {
+    if (window.confirm(`DELETE ${playlistObj.songId}?`)) {
+      console.warn('Delete event triggered!');
+      deletePlaylistSong(playlistObj.songId).then(() => {
+        onUpdate();
+      });
+    }
+  };
+
   return (
     <div className="text-center my-3">
       <h1>Playlist Detail</h1>
       <div className="my-5 artist-info">
-        {/* 
-          Add ? before the period. This is called an optional chaining operator. Without it
-          you might run into runtime errors.
-          
-          According to MDN, the object's properties we are trying
-          to access will instead evaluate to undefined instead of throwing errors.
-
-          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-        */}
         <p>{playlist?.name}</p>
         <img src={playlist?.image} alt="Playlist Cover" />
-        <p>{playlist?.song?.name}</p>
-        <p>{playlist?.song?.album?.name}</p>
-        <p>{playlist?.song?.artist?.name}</p>
-        <p>{playlist?.song?.length}</p>
       </div>
 
       <div>
         <h2>Songs</h2>
         {playlist?.songs?.map((song) => (
-          // <SongCard key={song.id} songObj={song} />
-          <p>{song.name}</p>
+          <div>
+            <p>{song.name}</p>
+            <img src={song.album.image} alt="Song Cover" />
+            <p>{song.album.name}</p>
+            <p>{song.artist.name}</p>
+            <p>{song.length}</p>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                ...
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Link href={`/playlists/${playlist.id}`} passHref>
+                    Go to playlist
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => deleteSongFromPlaylist({ playlistObj: song, onUpdate: setPlaylist })}>Delete</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         ))}
       </div>
-
-      <Link href={`/playlists/edit/${id}`} passHref>
-        Edit
-      </Link>
     </div>
   );
 }
 
 ViewPlaylist.propTypes = {
-  params: PropTypes.objectOf({}).isRequired,
+  params: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };

@@ -45,9 +45,9 @@ export default function ViewSong({ params }) {
         <p>{song?.artist?.name}</p>
       </div>
 
-      {/* <button className="btn btn-primary" type="button">
+      <button className="btn btn-primary" type="button">
         Add to playlist
-      </button> */}
+      </button>
     </div>
   );
 }
