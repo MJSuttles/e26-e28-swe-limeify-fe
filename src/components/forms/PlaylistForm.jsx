@@ -52,7 +52,7 @@ export default function PlaylistForm({ obj = initialFormState }) {
         ...prevState,
         categoryId: selectedCategory.id,
         category: {
-          id: selectedCategory.id,
+          // id: selectedCategory.id,
           name: selectedCategory.name,
         },
       }));
