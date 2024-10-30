@@ -39,10 +39,29 @@ export default function PlaylistForm({ obj = initialFormState }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    // Handle the logic to properly update the the values in the category object from the initialFormState.
+    if (name === 'categoryId') {
+      // Store the value of the selected categoryId after finding it using the array.find method.
+      const selectedCategory = categories.find((category) => category.id === Number(value));
+
+      // Logs the category object
+      console.warn('selectedCategory: ', selectedCategory);
+
+      // Include the category object and the categoryId as part of whatever is currently stored in formData.
+      setFormData((prevState) => ({
+        ...prevState,
+        categoryId: selectedCategory.id,
+        category: {
+          id: selectedCategory.id,
+          name: selectedCategory.name,
+        },
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   // Step five - handleSubmit.
@@ -109,7 +128,10 @@ PlaylistForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
     categoryId: PropTypes.number,
     songs: PropTypes.arrayOf,
     isPublic: PropTypes.bool,
