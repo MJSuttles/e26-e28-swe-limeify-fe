@@ -95,17 +95,18 @@ const addSongToPlaylist = async (songId, playlistId, payload) => {
 };
 
 // DELETE SONG FROM PLAYLIST
-const deletePlaylistSong = (songId, playlistId) =>
-  new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/songs/${songId}/remove-from-playlist/${playlistId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch(reject);
+const deleteSongFromPlaylist = async (songId, playlistId) => {
+  const response = await fetch(`${endpoint}/api/songs/${songId}/remove-from-playlist/${playlistId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
-export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deletePlaylistSong };
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(`HTTP error ${response.status}: ${errorData.error || response.statusText}`);
+  }
+};
+
+export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist };

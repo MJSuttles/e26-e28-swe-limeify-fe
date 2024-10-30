@@ -1,26 +1,28 @@
-/* eslint-disable @next/next/no-img-element */
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
-import { getSinglePlaylist, deletePlaylistSong } from '../../../api/playlistData';
+import { deleteSongFromPlaylist, getSinglePlaylist } from '../../../api/playlistData';
 
 export default function ViewPlaylist({ params }) {
   const [playlist, setPlaylist] = useState(null);
   const { id } = params;
 
-  useEffect(() => {
+  const refreshPlaylist = () => {
     getSinglePlaylist(id).then(setPlaylist);
+  };
+
+  useEffect(() => {
+    refreshPlaylist();
   }, [id]);
 
-  const deleteSongFromPlaylist = ({ playlistObj, onUpdate }) => {
-    if (window.confirm(`DELETE ${playlistObj.songId}?`)) {
-      console.warn('Delete event triggered!');
-      deletePlaylistSong(playlistObj.songId).then(() => {
-        onUpdate();
+  const handleDelete = (songId, playlistId) => {
+    if (window.confirm(`Delete song from playlist?`)) {
+      deleteSongFromPlaylist(songId, playlistId).then(() => {
+        console.log(`Song ${songId} was deleted from the playlist.`);
+        refreshPlaylist();
       });
     }
   };
@@ -36,7 +38,7 @@ export default function ViewPlaylist({ params }) {
       <div>
         <h2>Songs</h2>
         {playlist?.songs?.map((song) => (
-          <div>
+          <div key={song.id}>
             <p>{song.name}</p>
             <img src={song.album.image} alt="Song Cover" />
             <p>{song.album.name}</p>
@@ -53,7 +55,7 @@ export default function ViewPlaylist({ params }) {
                     Go to playlist
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => deleteSongFromPlaylist({ playlistObj: song, onUpdate: setPlaylist })}>Delete</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleDelete(song.id, playlist.id)}>Delete</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
