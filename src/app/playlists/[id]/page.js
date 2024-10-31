@@ -16,6 +16,7 @@ export default function ViewPlaylist({ params }) {
 
   useEffect(() => {
     refreshPlaylist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleDelete = (songId, playlistId) => {
