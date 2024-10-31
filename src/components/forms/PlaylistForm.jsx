@@ -12,7 +12,13 @@ import getCategories from '../../api/categoryData';
 const initialFormState = {
   name: '',
   image: '',
-  categoryId: '',
+  categoryId: Number(''),
+  category: {
+    id: Number(''),
+    name: '',
+  },
+  songs: [],
+  isPublic: false,
 };
 export default function PlaylistForm({ obj = initialFormState }) {
   const { user } = useAuth();
@@ -32,10 +38,30 @@ export default function PlaylistForm({ obj = initialFormState }) {
   // Step four - handleChange. This will be used as a callback function.
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    // Handle the logic to properly update the the values in the category object from the initialFormState.
+    if (name === 'categoryId') {
+      // Store the value of the selected categoryId after finding it using the array.find method.
+      const selectedCategory = categories.find((category) => category.id === Number(value));
+
+      // Logs the category object
+      console.warn('selectedCategory: ', selectedCategory);
+
+      // Include the category object and the categoryId as part of whatever is currently stored in formData.
+      setFormData((prevState) => ({
+        ...prevState,
+        categoryId: selectedCategory.id,
+        category: {
+          // id: selectedCategory.id,
+          name: selectedCategory.name,
+        },
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   // Step five - handleSubmit.
@@ -62,8 +88,6 @@ export default function PlaylistForm({ obj = initialFormState }) {
       <h1 className="my-5">Playlist Form</h1>
 
       <Form onSubmit={handleSubmit} className="text-center" style={{ width: '50%' }}>
-        {/* TODO: Each Form.Control needs an onChange attribute. Pass in handleChange as a callback. */}
-
         {/* PLAYLIST NAME INPUT */}
         <Form.Group className="mb-3" controlId="">
           <Form.Label>Name</Form.Label>
@@ -85,7 +109,7 @@ export default function PlaylistForm({ obj = initialFormState }) {
             <option value="">Select ...</option>
             {/* TODO: map over values. Remember to add a key prop. */}
             {categories.map((category) => (
-              <option key={category.id} value={Number(category.id)}>
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
@@ -100,14 +124,16 @@ export default function PlaylistForm({ obj = initialFormState }) {
   );
 }
 
-// Note to self: your prop types should be structured the same way as the records in your DB. If your payload
-// doesn't match the structure, the server may reject your request.
 PlaylistForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
     categoryId: PropTypes.number,
-    songs: PropTypes.bool,
+    songs: PropTypes.arrayOf,
+    isPublic: PropTypes.bool,
   }).isRequired,
 };
