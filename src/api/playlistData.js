@@ -94,4 +94,19 @@ const addSongToPlaylist = async (songId, playlistId, payload) => {
   }
 };
 
-export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist };
+// DELETE SONG FROM PLAYLIST
+const deleteSongFromPlaylist = async (songId, playlistId) => {
+  const response = await fetch(`${endpoint}/api/songs/${songId}/remove-from-playlist/${playlistId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(`HTTP error ${response.status}: ${errorData.error || response.statusText}`);
+  }
+};
+
+export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist };

@@ -1,58 +1,73 @@
-/* eslint-disable @next/next/no-img-element */
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { getSinglePlaylist } from '../../../api/playlistData';
+import { Dropdown } from 'react-bootstrap';
+import { deleteSongFromPlaylist, getSinglePlaylist } from '../../../api/playlistData';
 
 export default function ViewPlaylist({ params }) {
-  // Set useState
   const [playlist, setPlaylist] = useState(null);
-
   const { id } = params;
 
-  useEffect(() => {
+  const refreshPlaylist = () => {
     getSinglePlaylist(id).then(setPlaylist);
+  };
+
+  useEffect(() => {
+    refreshPlaylist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  const handleDelete = (songId, playlistId) => {
+    if (window.confirm(`Delete song from playlist?`)) {
+      deleteSongFromPlaylist(songId, playlistId).then(() => {
+        console.log(`Song ${songId} was deleted from the playlist.`);
+        refreshPlaylist();
+      });
+    }
+  };
 
   return (
     <div className="text-center my-3">
       <h1>Playlist Detail</h1>
       <div className="my-5 artist-info">
-        {/* 
-          Add ? before the period. This is called an optional chaining operator. Without it
-          you might run into runtime errors.
-          
-          According to MDN, the object's properties we are trying
-          to access will instead evaluate to undefined instead of throwing errors.
-
-          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-        */}
         <p>{playlist?.name}</p>
         <img src={playlist?.image} alt="Playlist Cover" />
-        <p>{playlist?.song?.name}</p>
-        <p>{playlist?.song?.album?.name}</p>
-        <p>{playlist?.song?.artist?.name}</p>
-        <p>{playlist?.song?.length}</p>
       </div>
 
       <div>
         <h2>Songs</h2>
         {playlist?.songs?.map((song) => (
-          // <SongCard key={song.id} songObj={song} />
-          <p>{song.name}</p>
+          <div key={song.id}>
+            <p>{song.name}</p>
+            <img src={song.album.image} alt="Song Cover" />
+            <p>{song.album.name}</p>
+            <p>{song.artist.name}</p>
+            <p>{song.length}</p>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                ...
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Link href={`/playlists/${playlist.id}`} passHref>
+                    Go to playlist
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleDelete(song.id, playlist.id)}>Delete</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         ))}
       </div>
-
-      <Link href={`/playlists/edit/${id}`} passHref>
-        Edit
-      </Link>
     </div>
   );
 }
 
 ViewPlaylist.propTypes = {
-  params: PropTypes.objectOf({}).isRequired,
+  params: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };
