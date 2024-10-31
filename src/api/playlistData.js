@@ -16,6 +16,27 @@ const getPlaylists = () =>
       .catch(reject);
   });
 
+// GET PUBLIC PLAYLISTS
+// TODO: Figure out how to structure the query parameters
+const getPublicPlaylists = () =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/playlists/public/?isPublic=true`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          resolve(Object.values(data));
+        } else {
+          resolve([]);
+        }
+      })
+      .catch(reject);
+  });
+
 // GET SINGLE PLAYLIST
 const getSinglePlaylist = (id) =>
   new Promise((resolve, reject) => {
@@ -109,4 +130,4 @@ const deleteSongFromPlaylist = async (songId, playlistId) => {
   }
 };
 
-export { getPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist };
+export { getPlaylists, getPublicPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist };
