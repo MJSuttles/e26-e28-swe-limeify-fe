@@ -42,4 +42,17 @@ const getSingleSong = (id) =>
       .catch(reject);
   });
 
-export { getSongs, getSingleSong };
+const searchSong = (query) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/songs/search?searchValue=${query}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch('Rejected! Error: ', reject);
+  });
+
+export { getSongs, getSingleSong, searchSong };
