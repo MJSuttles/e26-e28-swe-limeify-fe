@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { getPublicPlaylists } from '../../../api/playlistData';
-import PublicPlaylistCard from '../../../components/PublicPlaylistCard';
+import PlaylistCard from '../../../components/PlaylistCard';
 
 export default function PublicPlaylists() {
   const [publicPlaylists, setPublicPlaylists] = useState([]);
@@ -19,7 +19,7 @@ export default function PublicPlaylists() {
 
       {publicPlaylists.map((playlist) => (
         <div className="row-of-playlist-cards my-3" style={{ width: '20rem', height: '20rem' }}>
-          <PublicPlaylistCard key={playlist.id} playlistObj={playlist} />
+          <PlaylistCard key={playlist.id} playlistObj={playlist} />
         </div>
       ))}
     </div>
