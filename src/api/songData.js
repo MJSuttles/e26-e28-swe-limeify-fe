@@ -51,7 +51,7 @@ const searchSong = (query) =>
       },
     })
       .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((data) => resolve(Object.values(data)))
       .catch('Rejected! Error: ', reject);
   });
 
