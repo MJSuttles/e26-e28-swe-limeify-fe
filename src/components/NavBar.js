@@ -21,6 +21,9 @@ export default function NavBar() {
             <Link className="nav-link" href="/playlists">
               Playlists
             </Link>
+            <Link className="nav-link" href="/playlists/public" passHref>
+              Public Playlists
+            </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
             </Button>
