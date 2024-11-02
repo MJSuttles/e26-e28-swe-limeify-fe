@@ -7,10 +7,13 @@ import React from 'react';
 import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
 import { deletePlaylist } from '../api/playlistData';
+import { useAuth } from '../utils/context/authContext';
 
 // import Image from 'next/image';
 
 export default function PlaylistCard({ playlistObj, onUpdate }) {
+  const { user } = useAuth();
+
   const deletePlaylistFromView = () => {
     if (window.confirm(`Delete ${playlistObj.name}?`)) {
       console.warn('Delete event triggered!');
@@ -26,7 +29,7 @@ export default function PlaylistCard({ playlistObj, onUpdate }) {
       {/* <Image src={playlistObj.image} alt="playlist" height={400} width={400}/> */}
       <p>{playlistObj.name}</p>
       <p>{playlistObj.categoryId}</p>
-      {playlistObj.isPublic === false ? (
+      {playlistObj.isPublic === false && playlistObj.uid === user.uid ? (
         <div className="col">
           <Link href={`/playlists/edit/${playlistObj.id}`}>Edit</Link>
           <Link href={`/playlists/${playlistObj.id}`}>View Playlist</Link>
@@ -61,6 +64,7 @@ PlaylistCard.propTypes = {
     image: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     isPublic: PropTypes.bool,
+    uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
