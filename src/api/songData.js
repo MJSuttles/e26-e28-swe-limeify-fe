@@ -44,7 +44,7 @@ const getSingleSong = (id) =>
 
 const searchSong = (query) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/songs/search?searchValue=${query}`, {
+    fetch(`${endpoint}/api/songs/search?searchValue=${query}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
