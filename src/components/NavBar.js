@@ -19,7 +19,7 @@ export default function NavBar() {
               Songs
             </Link>
             <Link className="nav-link" href="/playlists">
-              Playlists
+              My Playlists
             </Link>
             <Link className="nav-link" href="/playlists/public" passHref>
               Public Playlists

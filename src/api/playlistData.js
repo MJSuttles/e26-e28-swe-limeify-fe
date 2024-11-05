@@ -16,6 +16,26 @@ const getPlaylists = () =>
       .catch(reject);
   });
 
+// GET PRIVATE PLAYLISTS
+const getPrivatePlaylists = (uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/user/${uid}/playlists`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          resolve(Object.values(data));
+        } else {
+          resolve([]);
+        }
+      })
+      .catch(reject);
+  });
+
 // GET PUBLIC PLAYLISTS
 // TODO: Figure out how to structure the query parameters
 const getPublicPlaylists = () =>
@@ -130,4 +150,4 @@ const deleteSongFromPlaylist = async (songId, playlistId) => {
   }
 };
 
-export { getPlaylists, getPublicPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist };
+export { getPlaylists, getPublicPlaylists, getSinglePlaylist, createPlaylist, updatePlaylist, deletePlaylist, addSongToPlaylist, deleteSongFromPlaylist, getPrivatePlaylists };
