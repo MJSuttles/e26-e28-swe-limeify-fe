@@ -35,6 +35,14 @@ export default function PlaylistForm({ obj = initialFormState }) {
     if (obj.id) setFormData(obj);
   }, [obj, user]);
 
+  // Handle isPublic Toggle
+  const handleToggle = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      isPublic: !prevState.isPublic,
+    }));
+  };
+
   // Step four - handleChange. This will be used as a callback function.
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -115,7 +123,9 @@ export default function PlaylistForm({ obj = initialFormState }) {
             ))}
           </Form.Select>
         </Form.Group>
-
+        <button type="button" onClick={handleToggle}>
+          {formData.isPublic ? 'Public' : 'Private'}
+        </button>
         <button className="btn btn-primary" type="submit">
           {obj.id ? 'Update' : 'Create'} playlist
         </button>
