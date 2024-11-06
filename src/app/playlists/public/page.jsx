@@ -19,7 +19,7 @@ export default function PublicPlaylists() {
       <div className="row">
         {publicPlaylists.map((playlist) => (
           <div className="col-md-4 my-3" key={playlist.id}>
-            <PlaylistCard playlistObj={playlist} />
+            <PlaylistCard playlistObj={playlist} onUpdate={getPublicPlaylists} />
           </div>
         ))}
       </div>
