@@ -9,8 +9,12 @@ import PlaylistCard from '../../../components/PlaylistCard';
 export default function PublicPlaylists() {
   const [publicPlaylists, setPublicPlaylists] = useState([]);
 
-  useEffect(() => {
+  const fetchPlaylistData = () => {
     getPublicPlaylists().then(setPublicPlaylists);
+  };
+
+  useEffect(() => {
+    fetchPlaylistData();
   }, []);
 
   return (
@@ -19,7 +23,7 @@ export default function PublicPlaylists() {
       <div className="row">
         {publicPlaylists.map((playlist) => (
           <div className="col-md-4 my-3" key={playlist.id}>
-            <PlaylistCard playlistObj={playlist} onUpdate={getPublicPlaylists} />
+            <PlaylistCard playlistObj={playlist} onUpdate={fetchPlaylistData} />
           </div>
         ))}
       </div>
