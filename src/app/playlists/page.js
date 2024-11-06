@@ -26,14 +26,18 @@ export default function PlaylistsPage() {
     <div className="container text-center my-4">
       <h1 className="my-3">My Playlists Page</h1>
       <Link href="/playlists/new" passHref>
-        <button type="button" className="btn btn-primary">
+        <button type="button" className="btn btn-primary my-3">
           Add a playlist
         </button>
       </Link>
 
-      {playlists.map((playlist) => (
-        <PlaylistCard key={playlist.id} playlistObj={playlist} onUpdate={fetchPlaylistData} />
-      ))}
+      <div className="row">
+        {playlists.map((playlist) => (
+          <div className="col-md-4 my-3" key={playlist.id}>
+            <PlaylistCard playlistObj={playlist} onUpdate={fetchPlaylistData} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

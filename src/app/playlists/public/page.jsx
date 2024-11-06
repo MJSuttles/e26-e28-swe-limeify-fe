@@ -14,14 +14,15 @@ export default function PublicPlaylists() {
   }, []);
 
   return (
-    <div className="text-center my-4">
-      <h1>Public Playlists</h1>
-
-      {publicPlaylists.map((playlist) => (
-        <div className="row-of-playlist-cards my-3" style={{ width: '20rem', height: '20rem' }}>
-          <PlaylistCard key={playlist.id} playlistObj={playlist} />
-        </div>
-      ))}
+    <div className="container text-center my-4">
+      <h1 className="my-3">Public Playlists</h1>
+      <div className="row">
+        {publicPlaylists.map((playlist) => (
+          <div className="col-md-4 my-3" key={playlist.id}>
+            <PlaylistCard playlistObj={playlist} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
