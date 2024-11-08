@@ -11,7 +11,6 @@ export default function NavBar() {
         <Link passHref href="/">
           <Navbar.Brand>
             <img src="/../images/limeify-logo.png" alt="Limeify Logo" width={100} height={75.6} style={{ marginLeft: '10px' }} />
-            <img src="/../images/limeify-name-only-logo.png" alt="Limeify Name" width={100} height={38.44} style={{ marginLeft: '10px' }} />
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
