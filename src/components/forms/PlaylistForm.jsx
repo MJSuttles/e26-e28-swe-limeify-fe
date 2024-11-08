@@ -123,7 +123,7 @@ export default function PlaylistForm({ obj = initialFormState }) {
             ))}
           </Form.Select>
         </Form.Group>
-        <button type="button" onClick={handleToggle}>
+        <button type="button" onClick={handleToggle} className="toggle-btn">
           {formData.isPublic ? 'Public' : 'Private'}
         </button>
         <button className="btn btn-primary" type="submit">

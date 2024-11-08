@@ -28,9 +28,7 @@ export default function SongCard({ songObj }) {
       </div>
       <div className="col">
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            ...
-          </Dropdown.Toggle>
+          <Dropdown.Toggle variant="success" id="dropdown-basic" />
 
           <Dropdown.Menu>
             <Dropdown.Item href="">

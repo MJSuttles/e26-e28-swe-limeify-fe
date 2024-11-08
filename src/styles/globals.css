@@ -11,4 +11,13 @@ body {
 
 .search-results {
   background-color: #1f1d1d;
+  width: 100%;
+}
+
+.search-song-card {
+  width: 1000px !important;
+}
+
+.toggle-btn {
+  margin-right: 10px;
 }
