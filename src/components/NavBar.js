@@ -9,22 +9,25 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>Limeify</Navbar.Brand>
+          <Navbar.Brand>
+            <img src="/../images/limeify-logo.png" alt="Limeify Logo" width={100} height={75.6} style={{ marginLeft: '10px' }} />
+            <img src="/../images/limeify-name-only-logo.png" alt="Limeify Name" width={100} height={38.44} style={{ marginLeft: '10px' }} />
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
-            <Link className="nav-link" href="/">
+            <Link className="nav-link" href="/" style={{ color: '#FFFFFF' }}>
               Songs
             </Link>
-            <Link className="nav-link" href="/playlists">
+            <Link className="nav-link" href="/playlists" style={{ color: '#FFFFFF' }}>
               My Playlists
             </Link>
-            <Link className="nav-link" href="/playlists/public" passHref>
+            <Link className="nav-link" href="/playlists/public" passHref style={{ color: '#FFFFFF' }}>
               Public Playlists
             </Link>
-            <Button variant="danger" onClick={signOut}>
+            <Button variant="danger" style={{ backgroundColor: '#E87373' }} onClick={signOut}>
               Sign Out
             </Button>
           </Nav>

@@ -18,7 +18,7 @@ export default function SearchBox() {
 
   return (
     <div>
-      <input type="text" name="search" id="search-box" placeholder="search a song" onChange={handleChange} aria-label="Search" className="mb-5" />
+      <input type="text" name="search" id="search-box" placeholder="search a song" onChange={handleChange} aria-label="Search" className="mb-5" style={{ width: '596px', height: '43px' }} />
 
       <div className="search-results">
         {query.map((item) => (
