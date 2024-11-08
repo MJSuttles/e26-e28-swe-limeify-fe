@@ -27,10 +27,10 @@ export default function NavBar() {
             <Link className="nav-link" href="/playlists/public" passHref style={{ color: '#FFFFFF' }}>
               Public Playlists
             </Link>
-            <Button variant="danger" style={{ backgroundColor: '#E87373' }} onClick={signOut}>
-              Sign Out
-            </Button>
           </Nav>
+          <Button variant="danger" style={{ backgroundColor: '#E87373' }} onClick={signOut}>
+            Sign Out
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
