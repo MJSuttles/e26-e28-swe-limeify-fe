@@ -15,9 +15,7 @@ function Signin() {
       }}
     >
       <Image src="/images/limeify-logo.png" alt="Limeify Logo" width={500} height={500} style={{ alignSelf: 'center' }} />
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <Button type="button" size="lg" className="copy-btn" style={{ color: '#000000', backgroundColor: '#61EFA3' }} onClick={signIn}>
         Sign In
       </Button>
     </div>

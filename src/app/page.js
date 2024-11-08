@@ -15,8 +15,10 @@ function Home() {
 
   return (
     <div className="text-center my-4" id="song-page">
-      <h1 className="my-3">Home</h1>
       <SearchBox />
+      <h1 className="my-3" style={{ textAlign: 'left', marginLeft: '0' }}>
+        Home
+      </h1>
       {songs.map((song) => (
         <SongCard key={song.id} songObj={song} />
       ))}

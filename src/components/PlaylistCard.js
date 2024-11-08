@@ -27,7 +27,6 @@ export default function PlaylistCard({ playlistObj, onUpdate }) {
     <div className="playlist-card border my-3" style={{ position: 'relative', padding: '1rem' }}>
       <img src={playlistObj.image} alt="playlist" style={{ width: '10rem', height: '10rem', marginTop: '20px' }} />
       <p>{playlistObj.name}</p>
-      <p>{playlistObj.categoryId}</p>
       {playlistObj.uid === user.uid ? (
         <div className="col">
           {playlistObj.isPublic === false ? (
@@ -40,9 +39,7 @@ export default function PlaylistCard({ playlistObj, onUpdate }) {
             </svg>
           )}
           <Dropdown style={{ position: 'absolute', bottom: '10px', right: '10px', marginBottom: '20px', marginRight: '20px' }}>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              ...
-            </Dropdown.Toggle>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" />
 
             <Dropdown.Menu>
               <Dropdown.Item href="">
