@@ -14,10 +14,24 @@ body {
   width: 100%;
 }
 
-.search-song-card {
-  width: 1000px !important;
+.view-playlist-page {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .toggle-btn {
   margin-right: 10px;
+}
+
+.artist-info {
+  margin-left: 6rem;
+}
+
+form {
+  color: black;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #DBEBDD;
 }
