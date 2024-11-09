@@ -14,6 +14,13 @@ body {
   width: 100%;
 }
 
+.view-playlist-page {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .search-song-card {
   width: 1000px !important;
 }

@@ -30,7 +30,7 @@ export default function ViewPlaylist({ params }) {
   };
 
   return (
-    <div className="d-flex flex-column text-center my-3">
+    <div className="view-playlist-page my-3">
       <div className="d-flex flex-row my-5 artist-info">
         <img src={playlist?.image} alt="Playlist Cover" className="col-4" />
         <div className="col-8">
@@ -39,7 +39,7 @@ export default function ViewPlaylist({ params }) {
         </div>
       </div>
 
-      <div className="d-flex flex-column justify-content-center">
+      <div className="songs">
         <h2 className="my-5">Songs</h2>
         {playlist?.songs?.map((song) => (
           <>
