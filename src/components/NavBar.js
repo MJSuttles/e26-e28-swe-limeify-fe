@@ -10,7 +10,7 @@ export default function NavBar() {
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>
-            <img src="/../images/limeify-icon.png" alt="Limeify Logo" width={100} height={75.6} style={{ marginLeft: '10px' }} />
+            <img src="/../images/limeify-icon.png" alt="Limeify Logo" width={60} height={50} style={{ marginLeft: '10px' }} />
             <img src="/../images/limeify-name-only-logo.png" alt="Limeify Name" width={100} height={38.44} />
           </Navbar.Brand>
         </Link>

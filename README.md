@@ -1,46 +1,27 @@
-# NextJS with Firebase Auth App Router Template
+Name of the Projects: es-e28-limeify-fe (front nd), Limeify BE (backend)
 
-[See Live Demo of this Template](https://drt-next-js-template-app-router.netlify.app/)
+Overview of the project: Limeify is an interactive music storage app that allow users to view playlists that other users have created. It also allows them to view, create, edit, and delete playlists that they've created. They can create these playlists via an online form and can choose whether they want the playlist to be viewable by the general public or only by themselves. Once they've created the playlist, they can they choose songs from a prepoluated list to add to it.
 
-## Topics
-- [Get Started](#get-started)
-- [Starting the Project](#starting-the-project)
-- [Deploying on Netlify](#deploying-on-netlify)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+Link to ERD: https://dbdiagram.io/d/Limeify-670ac52697a66db9a3c32e01
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+Link to your wireframes/prototype: https://www.figma.com/design/prhDr1Eet5ZkcghVvBffsC/Limeify-Wireframe?node-id=1-2&node-type=frame&t=EZgUEj1xASahCnvL-0
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+Link/screenshot of data flowchart: https://www.figma.com/board/vq3IWoSQmd9dbC0YwoUhvl/Limeify-Flow-Chart?node-id=0-1&node-type=canvas&t=IoY0YJLIlp0ygZbr-0
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+Link to the deployed project (will learn later): N/A
 
-### Deploying on Netlify
-Netlify will automatically detect your project and prepopulate the settings, but should something go wrong and it does not, here are the commands:
+Link to your project boards (yes...even though it is a part of the repo): https://github.com/users/MJSuttles/projects/4/views/1 (frontend), https://github.com/users/fmings/projects/12/views/1m (backend)
 
-- Build Command: `npm run build`
-- Publish directory: `.next`
+Description of the user and the problem you are solving for them:
 
-#### Additional Steps to Take on Netlify
-- Add Environmental Variables
-    - Any Enviromental variables you are using in your `.env` file should be added to Netlify. 
-        - Go to Site settings > Build & deploy > Environment > Environment variables and the keys and values there if you did not add them when you were deploying your site
+With so many music streaming platforms, people often have playlists scattered across multiple apps, leading to fragmented listening experiences.
 
-- Update Firebase URL Settings
-    - In Firebase under Authentication select sign in methods, scroll to Authorized domains. Add your Netlify URL.
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+There’s a need for a central, personalized space to easily create, manage, and customize playlists.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Our app aims to simplify playlist management, giving users full control over creating, updating, and deleting playlists from a vast library of songs, making their music experience more organized and enjoyable.
+
+Screenshots of your project: ![alt text](<Screenshot 2024-11-09 at 9.29.33 AM.png>), ![, ](<Screenshot 2024-11-09 at 9.30.09 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.32.09 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.32.27 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.33.14 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.33.39 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.34.14 AM.png>), ![alt text](<Screenshot 2024-11-09 at 9.34.36 AM.png>)
+
+List of contributors and links to their GH profiles: Brian Suttles (https://github.com/MJSuttles), Tion Blackmon (http://github.com/gnashed), Felicia Mings (https://github.com/fmings), Jesse French (https://github.com/jessefrench), Zach Colburn (https://github.com/Zpcolburn)
+
+Link to Loom video walkthrough of your app (no more than 1 minute long! Make it great):https://www.loom.com/share/a5a243d94427494783122dfa0ce89cbc?sid=34614a50-1dba-4678-b291-8fb7b62da571

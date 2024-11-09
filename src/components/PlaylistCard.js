@@ -9,8 +9,6 @@ import { Dropdown } from 'react-bootstrap';
 import { deletePlaylist } from '../api/playlistData';
 import { useAuth } from '../utils/context/authContext';
 
-// import Image from 'next/image';
-
 export default function PlaylistCard({ playlistObj, onUpdate }) {
   const { user } = useAuth();
 
