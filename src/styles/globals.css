@@ -28,3 +28,10 @@ body {
 .artist-info {
   margin-left: 6rem;
 }
+
+form {
+  color: black;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #DBEBDD;
+}
