@@ -7,7 +7,6 @@ import SearchBox from '../components/SearchBox';
 
 function Home() {
   const [songs, setSongs] = useState([]);
-  // console.warn(songs);
 
   useEffect(() => {
     getSongs().then(setSongs);

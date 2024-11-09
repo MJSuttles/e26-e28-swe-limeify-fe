@@ -26,7 +26,6 @@ export default function PlaylistForm({ obj = initialFormState }) {
 
   // Step two - set an initial state for the form.
   const [formData, setFormData] = useState(obj);
-  // console.warn(formData);
   const [categories, setCategories] = useState([]);
 
   // Step three - useEffect
@@ -60,7 +59,6 @@ export default function PlaylistForm({ obj = initialFormState }) {
         ...prevState,
         categoryId: selectedCategory.id,
         category: {
-          // id: selectedCategory.id,
           name: selectedCategory.name,
         },
       }));
@@ -76,7 +74,7 @@ export default function PlaylistForm({ obj = initialFormState }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
-      // TODO: Use router to send the user to the playlist they just created. Requires an API call to the backend to create a playlist, push payload to the BE.
+      // Use router to send the user to the playlist they just created. Requires an API call to the backend to create a playlist, push payload to the BE.
       // updatePlaylist(formData).then(() => router.push(`/playlists/${obj.id}`));
       updatePlaylist(formData).then(() => router.push(`/playlists`));
     } else {
@@ -110,12 +108,12 @@ export default function PlaylistForm({ obj = initialFormState }) {
           <Form.Text className="text-muted">required</Form.Text>
         </Form.Group>
 
-        {/* TODO: Dropdown select menu */}
+        {/* Dropdown select menu */}
         <Form.Group className="mb-3">
           <Form.Label>Category</Form.Label>
           <Form.Select onChange={handleChange} aria-label="Category" name="categoryId" className="mb-3" value={formData.categoryId || ''} required>
             <option value="">Select ...</option>
-            {/* TODO: map over values. Remember to add a key prop. */}
+            {/* Map over values. Remember to add a key prop. */}
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}

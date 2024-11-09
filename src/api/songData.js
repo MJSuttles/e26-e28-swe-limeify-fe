@@ -12,7 +12,6 @@ const getSongs = () =>
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.warn(data);
         if (data) {
           resolve(Object.values(data));
         } else {
@@ -32,7 +31,6 @@ const getSingleSong = (id) =>
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.warn(data);
         if (data) {
           resolve(data);
         } else {

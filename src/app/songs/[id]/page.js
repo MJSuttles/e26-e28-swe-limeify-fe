@@ -22,7 +22,6 @@ export default function ViewSong({ params }) {
     <div className="text-center my-3">
       <h1>Song Detail</h1>
       <div className="my-5 song-info">
-        {/* TODO: Add an image here for the song */}
         <img src={song?.album?.image} alt="Album cover." />
         {/* 
           Add ? before the period. This is called an optional chaining operator. Without it
