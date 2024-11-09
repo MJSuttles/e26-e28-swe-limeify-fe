@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Dropdown } from 'react-bootstrap';
 import { deleteSongFromPlaylist, getSinglePlaylist } from '../../../api/playlistData';
+import SongCard from '../../../components/SongCard';
 
 export default function ViewPlaylist({ params }) {
   const [playlist, setPlaylist] = useState(null);
@@ -29,22 +30,21 @@ export default function ViewPlaylist({ params }) {
   };
 
   return (
-    <div className="text-center my-3">
-      <h1>Playlist Detail</h1>
-      <div className="my-5 artist-info">
-        <p>{playlist?.name}</p>
-        <img src={playlist?.image} alt="Playlist Cover" />
+    <div className="d-flex flex-column text-center my-3">
+      <div className="d-flex flex-row my-5 artist-info">
+        <img src={playlist?.image} alt="Playlist Cover" className="col-4" />
+        <div className="col-8">
+          <h1>{playlist?.name}</h1>
+          <h6>{playlist?.category?.name}</h6>
+        </div>
       </div>
 
-      <div>
-        <h2>Songs</h2>
+      <div className="d-flex flex-column justify-content-center">
+        <h2 className="my-5">Songs</h2>
         {playlist?.songs?.map((song) => (
-          <div key={song.id}>
-            <p>{song.name}</p>
-            <img src={song.album.image} alt="Song Cover" />
-            <p>{song.album.name}</p>
-            <p>{song.artist.name}</p>
-            <p>{song.length}</p>
+          <>
+            <SongCard key={song.id} songObj={song} />
+
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
                 ...
@@ -59,7 +59,9 @@ export default function ViewPlaylist({ params }) {
                 <Dropdown.Item onClick={() => handleDelete(song.id, playlist.id)}>Delete</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </div>
+
+            <hr />
+          </>
         ))}
       </div>
     </div>
