@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export default function SongCard({ songObj }) {
   return (
-    <div className="row align-items-center border my-3" style={{ width: '90%', height: '7rem' }}>
+    <div className="row align-items-center border my-3" style={{ width: '80%', height: '7rem' }}>
       <div className="col">
         <img src={songObj?.album?.image} alt="Album" style={{ width: '4.25rem', height: '4.25rem' }} />
         {/* <Image src={songObj?.album?.image} alt="playlist" height={400} width={400}/> */}

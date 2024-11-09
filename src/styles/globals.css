@@ -21,10 +21,6 @@ body {
   align-items: center;
 }
 
-.search-song-card {
-  width: 1000px !important;
-}
-
 .toggle-btn {
   margin-right: 10px;
 }
